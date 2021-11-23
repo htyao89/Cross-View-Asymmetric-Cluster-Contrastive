@@ -29,3 +29,4 @@ CUDA_VISIBLE_DEVICES=0  python examples/main.py -b 128 -a resnet50 -d market1501
 ```
 CUDA_VISIBLE_DEVICES=0,1  python examples/main_unsupervised.py -b 128 -a resnet50 -d market1501 --iters 400 --w 0.5 --momentum 0.1 --eps 0.4 --num-instances 16  --logs-dir ./example/market1501_unsupervised
 ```
+The code is implemented based on the public code:https://github.com/alibaba/cluster-contrast 
