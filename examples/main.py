@@ -274,7 +274,6 @@ def main_worker(args):
     for epoch in range(args.epochs):
         if epoch==0:
             with torch.no_grad():
-                print('==> Create pseudo labels for unlabeled data')
                 cluster_loader = get_test_loader(dataset, args.height, args.width,args.batch_size, args.workers, testset=sorted(dataset.train)) 
                 features, labels = extract_features(model, cluster_loader, print_freq=50)
                 features = torch.cat([features[f].unsqueeze(0) for f, _, _ in sorted(dataset.train)], 0)
