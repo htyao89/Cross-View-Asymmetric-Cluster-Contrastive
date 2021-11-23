@@ -269,7 +269,7 @@ def main_worker(args):
     milestones=[50,100,150]
     lr_scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, milestones=milestones, gamma=0.1)
     # Trainer
-    trainer = DualClusterContrastTrainerClusterContrastTrainer(model)
+    trainer = DualClusterContrastTrainer(model)
     best_acc = 0.0
     for epoch in range(args.epochs):
         if epoch==0:
@@ -304,7 +304,7 @@ def main_worker(args):
             trainer.loss = dcc_loss
 
         train_loader = get_train_loader(args, dataset, args.height, args.width, args.batch_size, args.workers, args.num_instances, iters)
-        cluster_features = trainer.train(epoch, train_loader, optimizer,print_freq=args.print_freq, train_iters=len(train_loader),use_hard=False)
+        cluster_features = trainer.train(epoch, train_loader, optimizer,print_freq=args.print_freq)
 
 
         if (epoch + 1) % args.eval_step == 0 or (epoch == args.epochs - 1):
