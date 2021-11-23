@@ -1,19 +1,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='ClusterContrast',
+setup(name='DualClusterContrastive',
       version='1.0.0',
-      description='Cluster Contrast for Unsupervised Person Re-Identification',
-      author='GuangYuan wang',
-      author_email='yixuan.wgy@alibaba-inc.com',
+      description='Dual Cluster Contrastive learning for Person Re-Identification',
       # url='',
       install_requires=[
           'numpy', 'torch', 'torchvision',
           'six', 'h5py', 'Pillow', 'scipy',
           'scikit-learn', 'metric-learn', 'faiss_gpu'],
-      packages=find_packages(),
-      keywords=[
-          'Unsupervised Learning',
-          'Contrastive Learning',
-          'Object Re-identification'
-      ])
+      packages=find_packages())
