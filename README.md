@@ -21,4 +21,6 @@ exmpales/data/msmt17/MSMT17_V1
 
 ## Training on supervised
 
+python examples/main.py -b 128 -a resnet50 -d market1501 --momentum 0.1 --w 0.25 --num-instances 16 --logs-dir ./examples/market1501_supervised
+
 ## Training on unsupervised
