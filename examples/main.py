@@ -234,7 +234,7 @@ class DCCLoss(nn.Module):
         loss_icc = F.cross_entropy(inputs_icc, targets, size_average=self.size_average)
 
         loss_con = F.smooth_l1_loss(inputs_ccc, inputs_icc.detach(), reduction='elementwise_mean')
-        loss = loss_ccc+loss_icc+0.25*loss_con
+        loss = loss_ccc+loss_icc+self.weight*loss_con
 
         return loss
 
