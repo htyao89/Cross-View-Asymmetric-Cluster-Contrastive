@@ -303,7 +303,7 @@ def main_worker(args):
             dcc_loss = DCCLoss(2048,num_cluster,weight= args.w, momentum = args.momentum, init_feat=F.normalize(cluster_features, dim=1).cuda())
             trainer.loss = dcc_loss
 
-        train_loader = get_train_loader(args, dataset, args.height, args.width, args.batch_size, args.workers, args.num_instances, iters)
+        train_loader = get_train_loader(args, dataset, args.height, args.width, args.batch_size, args.workers, args.num_instances)
         cluster_features = trainer.train(epoch, train_loader, optimizer,print_freq=args.print_freq)
 
 
@@ -345,16 +345,6 @@ if __name__ == '__main__':
                              "(batch_size // num_instances) identities, and "
                              "each identity has num_instances instances, "
                              "default: 0 (NOT USE)")
-    # cluster
-    parser.add_argument('--eps', type=float, default=0.6,
-                        help="max neighbor distance for DBSCAN")
-    parser.add_argument('--eps-gap', type=float, default=0.02,
-                        help="multi-scale criterion for measuring cluster reliability")
-    parser.add_argument('--k1', type=int, default=30,
-                        help="hyperparameter for jaccard distance")
-    parser.add_argument('--k2', type=int, default=6,
-                        help="hyperparameter for jaccard distance")
-
     # model
     parser.add_argument('-a', '--arch', type=str, default='resnet50',
                         choices=models.names())
@@ -369,7 +359,6 @@ if __name__ == '__main__':
                         help="learning rate")
     parser.add_argument('--weight-decay', type=float, default=5e-4)
     parser.add_argument('--epochs', type=int, default=150)
-    parser.add_argument('--iters', type=int, default=300)
     parser.add_argument('--step-size', type=int, default=50)
     # training configs
     parser.add_argument('--seed', type=int, default=1)
