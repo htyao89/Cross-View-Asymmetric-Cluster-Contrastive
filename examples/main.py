@@ -246,7 +246,7 @@ def main_worker(args):
 
     cudnn.benchmark = True
 
-    #sys.stdout = Logger(osp.join(args.logs_dir, 'log.txt'))
+    sys.stdout = Logger(osp.join(args.logs_dir, 'log.txt'))
     print("==========\nArgs:{}\n==========".format(args))
 
     # Create datasets
