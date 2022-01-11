@@ -234,7 +234,7 @@ class DCCLoss(nn.Module):
         loss_icc = F.cross_entropy(inputs_icc, targets, size_average=self.size_average)
 
         loss_con = F.smooth_l1_loss(inputs_ccc, inputs_icc.detach(), reduction='elementwise_mean')
-        loss = loss_ccc+loss_icc+0.25*loss_con
+        loss = loss_ccc+loss_icc+self.weight*loss_con
 
         return loss
 
@@ -246,7 +246,7 @@ def main_worker(args):
 
     cudnn.benchmark = True
 
-    #sys.stdout = Logger(osp.join(args.logs_dir, 'log.txt'))
+    sys.stdout = Logger(osp.join(args.logs_dir, 'log.txt'))
     print("==========\nArgs:{}\n==========".format(args))
 
     # Create datasets
@@ -274,7 +274,6 @@ def main_worker(args):
     for epoch in range(args.epochs):
         if epoch==0:
             with torch.no_grad():
-                print('==> Create pseudo labels for unlabeled data')
                 cluster_loader = get_test_loader(dataset, args.height, args.width,args.batch_size, args.workers, testset=sorted(dataset.train)) 
                 features, labels = extract_features(model, cluster_loader, print_freq=50)
                 features = torch.cat([features[f].unsqueeze(0) for f, _, _ in sorted(dataset.train)], 0)
