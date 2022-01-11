@@ -40,7 +40,7 @@ def get_data(name, data_dir):
 
 
 def get_train_loader(args, dataset, height, width, batch_size, workers,
-                     num_instances, iters, trainset=None):
+                     num_instances,  trainset=None):
 
     normalizer = T.Normalize(mean=[0.485, 0.456, 0.406],
                              std=[0.229, 0.224, 0.225])
@@ -250,7 +250,7 @@ def main_worker(args):
     print("==========\nArgs:{}\n==========".format(args))
 
     # Create datasets
-    iters = args.iters if (args.iters > 0) else None
+    #iters = args.iters if (args.iters > 0) else None
     print("==> Load unlabeled dataset")
     dataset = get_data(args.dataset, args.data_dir)
     test_loader = get_test_loader(dataset, args.height, args.width, args.batch_size, args.workers)
