@@ -1,4 +1,4 @@
-# Dual-Cluster-Contrastive
+# Cross-view Asymmetric Cluster Contrastive 
 
 ### Installation
 
